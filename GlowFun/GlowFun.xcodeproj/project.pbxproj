@@ -13,6 +13,7 @@
 		2C1D14611E1CCB7D00826453 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C1D145F1E1CCB7D00826453 /* Main.storyboard */; };
 		2C1D14631E1CCB7D00826453 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C1D14621E1CCB7D00826453 /* Assets.xcassets */; };
 		2C1D14661E1CCB7D00826453 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C1D14641E1CCB7D00826453 /* LaunchScreen.storyboard */; };
+		2CACD8181E1DE4E600F2E7FC /* MethodObject1.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CACD8171E1DE4E600F2E7FC /* MethodObject1.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,8 @@
 		2C1D14621E1CCB7D00826453 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2C1D14651E1CCB7D00826453 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2C1D14671E1CCB7D00826453 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2CACD8161E1DE4E600F2E7FC /* MethodObject1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MethodObject1.h; sourceTree = "<group>"; };
+		2CACD8171E1DE4E600F2E7FC /* MethodObject1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MethodObject1.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +63,8 @@
 			children = (
 				2C1D14591E1CCB7D00826453 /* AppDelegate.h */,
 				2C1D145A1E1CCB7D00826453 /* AppDelegate.m */,
+				2CACD8161E1DE4E600F2E7FC /* MethodObject1.h */,
+				2CACD8171E1DE4E600F2E7FC /* MethodObject1.m */,
 				2C1D145C1E1CCB7D00826453 /* ViewController.h */,
 				2C1D145D1E1CCB7D00826453 /* ViewController.m */,
 				2C1D145F1E1CCB7D00826453 /* Main.storyboard */,
@@ -153,6 +158,7 @@
 				2C1D145E1E1CCB7D00826453 /* ViewController.m in Sources */,
 				2C1D145B1E1CCB7D00826453 /* AppDelegate.m in Sources */,
 				2C1D14581E1CCB7D00826453 /* main.m in Sources */,
+				2CACD8181E1DE4E600F2E7FC /* MethodObject1.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,6 +313,7 @@
 				2C1D146C1E1CCB7D00826453 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

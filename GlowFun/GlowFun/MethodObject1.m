@@ -1,15 +1,14 @@
 //
-//  ViewController.m
+//  MethodObject1.m
 //  GlowFun
 //
-//  Created by sylar on 2017/1/4.
+//  Created by sylar on 2017/1/5.
 //  Copyright © 2017年 sylar. All rights reserved.
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
-#import "ViewController.h"
 #import "MethodObject1.h"
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface ViewController ()
+@interface MethodObject1()
 
 @property (nonatomic, strong) NSString *startFrame;
 @property (nonatomic, strong) NSString *endFrame;
@@ -19,43 +18,38 @@
 
 @end
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation ViewController
+@implementation MethodObject1
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    [self setInitialValue];
++ (instancetype)share {
+    static MethodObject1 *inst = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        inst = [[MethodObject1 alloc] init];
+    });
+    return inst;
 }
 
-- (void)setInitialValue {
-    _startFrame = @"wrbbrrbbrrbbrrbb";
-    _endFrame   = @"wbrbbrbrrbrbbrbr";
-    _frames = [[NSMutableDictionary alloc] init];
-    _maxMoveSteps = 50;
+- (id)init {
+    self = [super init];
+    if (self) {
+        _startFrame = @"wrbbrrbbrrbbrrbb";
+        _endFrame   = @"wbrbbrbrrbrbbrbr";
+        _frames = [[NSMutableDictionary alloc] init];
+        _maxMoveSteps = 50;
+    }
+    return self;
 }
 
-- (IBAction)btn1:(id)sender {
-    [self calculate];
+- (void)calculate1 {
+    
 }
-
-- (void)calculate {
-    NSLog(@"sylar :  calculate");
-    
-//    NSString *s1 = [self moveDown:@"rbrbbwbrrbrbbrbr"];
-//    NSLog(@"sylar :  s1 = %@", s1);
-    
-    [_frames removeAllObjects];
-    
-    [self MoveForewardWithValue:_startFrame steps:@""];
-}
-
 
 - (void)MoveForewardWithValue:(NSString *)value steps:(NSString *)step {
     
     kReturnNilCondition(value);
     
     if (step.length > _maxMoveSteps) {
-//        NSLog(@"sylar :  max");
+        //        NSLog(@"sylar :  max");
         return;
     }
     
@@ -109,7 +103,6 @@
     NSLog(@"sylar :  success.step = %@ (%ld)", steps, (long)steps.length);
 }
 
-#pragma mark - helper
 - (BOOL)checkSuccess:(NSString *)value {
     BOOL rt = NO;
     if ([_endFrame isEqualToString:value]) {
@@ -124,19 +117,21 @@
     NSArray *keys = [_frames allKeys];
     if ([keys containsObject:value]) {
         rt = YES;
-//        NSString *oldSteps = [_frames objectForKey:value];
-//        if (steps.length == oldSteps.length) {
-////            NSLog(@"sylar :  same length = %@ - %@", oldSteps, steps);
-//        } else if (steps.length < oldSteps.length) {
-//            [_frames setObject:steps forKey:value];
-//        }
+        //        NSString *oldSteps = [_frames objectForKey:value];
+        //        if (steps.length == oldSteps.length) {
+        ////            NSLog(@"sylar :  same length = %@ - %@", oldSteps, steps);
+        //        } else if (steps.length < oldSteps.length) {
+        //            [_frames setObject:steps forKey:value];
+        //        }
     }
     
     return rt;
 }
 
+
+#pragma mark - move 
 - (NSString *)moveLeft:(NSString *)value {
-//    NSLog(@"sylar :  moveLeft");
+    //    NSLog(@"sylar :  moveLeft");
     NSString *rt = nil;
     NSInteger index = [value rangeOfString:@"w"].location;
     if (index != NSNotFound) {
@@ -151,7 +146,7 @@
 }
 
 - (NSString *)moveRight:(NSString *)value {
-//    NSLog(@"sylar :  moveRight");
+    //    NSLog(@"sylar :  moveRight");
     NSString *rt = nil;
     NSInteger index = [value rangeOfString:@"w"].location;
     if (index != NSNotFound) {
@@ -166,7 +161,7 @@
 }
 
 - (NSString *)moveUp:(NSString *)value {
-//    NSLog(@"sylar :  moveUp");
+    //    NSLog(@"sylar :  moveUp");
     NSString *rt = nil;
     NSInteger index = [value rangeOfString:@"w"].location;
     if (index != NSNotFound) {
@@ -180,7 +175,7 @@
 }
 
 - (NSString *)moveDown:(NSString *)value {
-//    NSLog(@"sylar :  moveDown");
+    //    NSLog(@"sylar :  moveDown");
     NSString *rt = nil;
     NSInteger index = [value rangeOfString:@"w"].location;
     if (index != NSNotFound) {
@@ -192,7 +187,6 @@
     }
     return rt;
 }
-
 
 
 @end
