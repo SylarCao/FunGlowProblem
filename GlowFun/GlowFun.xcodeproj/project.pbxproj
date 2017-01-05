@@ -16,6 +16,7 @@
 		2CACD81C1E1DF28600F2E7FC /* MethodObject1.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CACD81B1E1DF28600F2E7FC /* MethodObject1.m */; };
 		2CACD81F1E1DF29300F2E7FC /* MethodThread2.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CACD81E1E1DF29300F2E7FC /* MethodThread2.m */; };
 		2CACD8221E1E0CA700F2E7FC /* MethodReference3.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CACD8211E1E0CA700F2E7FC /* MethodReference3.m */; };
+		2CACD8281E1E2D0000F2E7FC /* MethodThread4.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CACD8271E1E2D0000F2E7FC /* MethodThread4.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,8 @@
 		2CACD81E1E1DF29300F2E7FC /* MethodThread2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MethodThread2.m; sourceTree = "<group>"; };
 		2CACD8201E1E0CA700F2E7FC /* MethodReference3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MethodReference3.h; sourceTree = "<group>"; };
 		2CACD8211E1E0CA700F2E7FC /* MethodReference3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MethodReference3.m; sourceTree = "<group>"; };
+		2CACD8261E1E2D0000F2E7FC /* MethodThread4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MethodThread4.h; sourceTree = "<group>"; };
+		2CACD8271E1E2D0000F2E7FC /* MethodThread4.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MethodThread4.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +101,8 @@
 				2CACD81E1E1DF29300F2E7FC /* MethodThread2.m */,
 				2CACD8201E1E0CA700F2E7FC /* MethodReference3.h */,
 				2CACD8211E1E0CA700F2E7FC /* MethodReference3.m */,
+				2CACD8261E1E2D0000F2E7FC /* MethodThread4.h */,
+				2CACD8271E1E2D0000F2E7FC /* MethodThread4.m */,
 			);
 			path = sylar;
 			sourceTree = "<group>";
@@ -179,6 +184,7 @@
 				2CACD81F1E1DF29300F2E7FC /* MethodThread2.m in Sources */,
 				2C1D14581E1CCB7D00826453 /* main.m in Sources */,
 				2CACD81C1E1DF28600F2E7FC /* MethodObject1.m in Sources */,
+				2CACD8281E1E2D0000F2E7FC /* MethodThread4.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

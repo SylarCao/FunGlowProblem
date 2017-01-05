@@ -10,6 +10,7 @@
 #import "MethodObject1.h"
 #import "MethodThread2.h"
 #import "MethodReference3.h"
+#import "MethodThread4.h"
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 # define kReturnNilCondition(condition)    if (condition == nil) {return;}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -43,11 +44,9 @@
     
 //    [[MethodThread2 share] calculate1];
     
-    [[MethodReference3 share] reference1];
+//    [[MethodReference3 share] reference1];
     
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//        [[MethodReference3 share] reference1];
-//    });
+    [[MethodThread4 share] thread1];
 }
 
 - (void)calculate {
