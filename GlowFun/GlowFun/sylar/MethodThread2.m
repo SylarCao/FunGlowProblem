@@ -1,73 +1,115 @@
 //
-//  ViewController.m
+//  MethodThread2.m
 //  GlowFun
 //
-//  Created by sylar on 2017/1/4.
+//  Created by sylar on 2017/1/5.
 //  Copyright © 2017年 sylar. All rights reserved.
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
-#import "ViewController.h"
-#import "MethodObject1.h"
 #import "MethodThread2.h"
-#import "MethodReference3.h"
-////////////////////////////////////////////////////////////////////////////////////////////////////////
+#import <pthread.h>
 # define kReturnNilCondition(condition)    if (condition == nil) {return;}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface ViewController ()
-
+@interface MethodThread2()
 @property (nonatomic, strong) NSString *startFrame;
 @property (nonatomic, strong) NSString *endFrame;
 @property (nonatomic, assign) NSInteger maxMoveSteps;
 
-@property (nonatomic, strong) NSMutableDictionary *frames;  //@{@"wrbbrbb" => @"RRDDRLU"}
+@property (nonatomic, strong) NSMutableArray *frames;
+
+@property (nonatomic, assign) BOOL running;
+
 
 @end
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation ViewController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    [self setInitialValue];
+@implementation MethodThread2 {
+    pthread_mutex_t _routesIndexMutexLock;
 }
 
-- (void)setInitialValue {
-    _startFrame = @"wrbbrrbbrrbbrrbb";
-    _endFrame   = @"wbrbbrbrrbrbbrbr";
-    _frames = [[NSMutableDictionary alloc] init];
-    _maxMoveSteps = 50;
++ (instancetype)share {
+    static MethodThread2 *inst = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        inst = [[MethodThread2 alloc] init];
+    });
+    return inst;
 }
 
-- (IBAction)btn1:(id)sender {
-//    [self calculate];
-    
-//    [[MethodThread2 share] calculate1];
-    
-    [[MethodReference3 share] reference1];
-    
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//        [[MethodReference3 share] reference1];
-//    });
+- (id)init {
+    self = [super init];
+    if (self) {
+        _startFrame = @"wrbbrrbbrrbbrrbb";
+        _endFrame   = @"wbrbbrbrrbrbbrbr";
+        _frames = [[NSMutableArray alloc] init];
+        _maxMoveSteps = 35;
+        _running = NO;
+    }
+    return self;
 }
 
-- (void)calculate {
-    NSLog(@"sylar :  calculate");
-    
-//    NSString *s1 = [self moveDown:@"rbrbbwbrrbrbbrbr"];
-//    NSLog(@"sylar :  s1 = %@", s1);
-    
+- (void)calculate1 {
     [_frames removeAllObjects];
     
-    [self MoveForewardWithValue:_startFrame steps:@""];
+    
+    [self threadCalculate];
+    
 }
 
+- (void)threadCalculate {
+    
+    NSInteger thread = 2;
+    NSMutableArray *tt = [[NSMutableArray alloc] init];
+    
+    for (int i=0; i<thread; i++) {
+        NSThread *thread = [[NSThread alloc] initWithTarget:self selector:@selector(thread1) object:nil ];
+        thread.qualityOfService = NSQualityOfServiceUserInitiated;
+        thread.name = [NSString stringWithFormat:@"%i", i];
+        [tt addObject:thread];
+    }
+    
+    for (NSThread *thread in tt) {
+        [thread start];
+    }
+}
+
+- (void)thread1 {
+//    @autoreleasepool {
+    static int i = 0;
+    int var = i++;
+        pthread_mutex_lock(&_routesIndexMutexLock);
+        NSLog(@"sylar :  begin = %d", var);
+        CFAbsoluteTime t1 = CFAbsoluteTimeGetCurrent();
+        [self MoveForewardWithValue:_startFrame steps:@""];
+        
+        NSLog(@"sylar :  end = %d", var);
+        CFAbsoluteTime t2 = CFAbsoluteTimeGetCurrent();
+        
+        NSLog(@"sylar :  time = %f", t2-t1);
+        pthread_mutex_unlock(&_routesIndexMutexLock);
+//    }
+}
+
+- (void)onlyCalculate {
+    NSLog(@"sylar :  begin");
+    CFAbsoluteTime t1 = CFAbsoluteTimeGetCurrent();
+    [self MoveForewardWithValue:_startFrame steps:@""];
+    
+    NSLog(@"sylar :  end");
+    CFAbsoluteTime t2 = CFAbsoluteTimeGetCurrent();
+    
+    NSLog(@"sylar :  time = %f", t2-t1);
+    
+    // 50 for   time = 53.985772
+    // 40 for   time = 36.021440
+    // 35 for   time = 10.301435
+}
 
 - (void)MoveForewardWithValue:(NSString *)value steps:(NSString *)step {
     
     kReturnNilCondition(value);
     
     if (step.length > _maxMoveSteps) {
-//        NSLog(@"sylar :  max");
+        //        NSLog(@"sylar :  max");
         return;
     }
     
@@ -79,19 +121,21 @@
     }
     
     // check exist
-    BOOL exist = [self checkExist:value steps:step];
+    BOOL exist = [self checkExist:value];
     if (exist) {
-        NSString *oldStep = [_frames objectForKey:value];
-        if (oldStep.length <= step.length) {
-            return;
-        } else {
-            [_frames setObject:step forKey:value];
-        }
+        return;
+        //        NSString *oldStep = [_frames objectForKey:value];
+        //        if (oldStep.length <= step.length) {
+        //            return;
+        //        } else {
+        ////            [_frames setObject:step forKey:value];
+        //        }
         
     }
     
     // add to the frames
-    [_frames setObject:step forKey:value];
+//        [_frames setObject:step forKey:value];
+    [_frames addObject:value];
     
     // move left
     NSString *left = [self moveLeft:value];
@@ -121,7 +165,6 @@
     NSLog(@"sylar :  success.step = %@ (%ld)", steps, (long)steps.length);
 }
 
-#pragma mark - helper
 - (BOOL)checkSuccess:(NSString *)value {
     BOOL rt = NO;
     if ([_endFrame isEqualToString:value]) {
@@ -130,25 +173,26 @@
     return rt;
 }
 
-- (BOOL)checkExist:(NSString *)value steps:(NSString *)steps {
+- (BOOL)checkExist:(NSString *)value {
     BOOL rt = NO;
     
-    NSArray *keys = [_frames allKeys];
-    if ([keys containsObject:value]) {
+    if ([_frames containsObject:value]) {
         rt = YES;
-//        NSString *oldSteps = [_frames objectForKey:value];
-//        if (steps.length == oldSteps.length) {
-////            NSLog(@"sylar :  same length = %@ - %@", oldSteps, steps);
-//        } else if (steps.length < oldSteps.length) {
-//            [_frames setObject:steps forKey:value];
-//        }
+        //        NSString *oldSteps = [_frames objectForKey:value];
+        //        if (steps.length == oldSteps.length) {
+        ////            NSLog(@"sylar :  same length = %@ - %@", oldSteps, steps);
+        //        } else if (steps.length < oldSteps.length) {
+        //            [_frames setObject:steps forKey:value];
+        //        }
     }
     
     return rt;
 }
 
+
+#pragma mark - move
 - (NSString *)moveLeft:(NSString *)value {
-//    NSLog(@"sylar :  moveLeft");
+    //    NSLog(@"sylar :  moveLeft");
     NSString *rt = nil;
     NSInteger index = [value rangeOfString:@"w"].location;
     if (index != NSNotFound) {
@@ -163,7 +207,7 @@
 }
 
 - (NSString *)moveRight:(NSString *)value {
-//    NSLog(@"sylar :  moveRight");
+    //    NSLog(@"sylar :  moveRight");
     NSString *rt = nil;
     NSInteger index = [value rangeOfString:@"w"].location;
     if (index != NSNotFound) {
@@ -178,7 +222,7 @@
 }
 
 - (NSString *)moveUp:(NSString *)value {
-//    NSLog(@"sylar :  moveUp");
+    //    NSLog(@"sylar :  moveUp");
     NSString *rt = nil;
     NSInteger index = [value rangeOfString:@"w"].location;
     if (index != NSNotFound) {
@@ -192,7 +236,7 @@
 }
 
 - (NSString *)moveDown:(NSString *)value {
-//    NSLog(@"sylar :  moveDown");
+    //    NSLog(@"sylar :  moveDown");
     NSString *rt = nil;
     NSInteger index = [value rangeOfString:@"w"].location;
     if (index != NSNotFound) {
@@ -204,7 +248,5 @@
     }
     return rt;
 }
-
-
 
 @end

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-# define kReturnNilCondition(condition)    if (condition == nil) {return;}
+
 
 @interface MethodObject1 : NSObject
 

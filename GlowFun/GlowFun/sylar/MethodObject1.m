@@ -7,6 +7,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 #import "MethodObject1.h"
+# define kReturnNilCondition(condition)    if (condition == nil) {return;}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface MethodObject1()
 
@@ -14,7 +15,7 @@
 @property (nonatomic, strong) NSString *endFrame;
 @property (nonatomic, assign) NSInteger maxMoveSteps;
 
-@property (nonatomic, strong) NSMutableDictionary *frames;  //@{@"wrbbrbb" => @"RRDDRLU"}
+@property (nonatomic, strong) NSMutableArray *frames;
 
 @end
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -34,7 +35,7 @@
     if (self) {
         _startFrame = @"wrbbrrbbrrbbrrbb";
         _endFrame   = @"wbrbbrbrrbrbbrbr";
-        _frames = [[NSMutableDictionary alloc] init];
+        _frames = [[NSMutableArray alloc] init];
         _maxMoveSteps = 50;
     }
     return self;
@@ -61,19 +62,20 @@
     }
     
     // check exist
-    BOOL exist = [self checkExist:value steps:step];
+    BOOL exist = [self checkExist:value];
     if (exist) {
-        NSString *oldStep = [_frames objectForKey:value];
-        if (oldStep.length <= step.length) {
-            return;
-        } else {
-            [_frames setObject:step forKey:value];
-        }
+        return;
+//        NSString *oldStep = [_frames objectForKey:value];
+//        if (oldStep.length <= step.length) {
+//            return;
+//        } else {
+////            [_frames setObject:step forKey:value];
+//        }
         
     }
     
     // add to the frames
-    [_frames setObject:step forKey:value];
+//    [_frames setObject:step forKey:value];
     
     // move left
     NSString *left = [self moveLeft:value];
@@ -111,11 +113,10 @@
     return rt;
 }
 
-- (BOOL)checkExist:(NSString *)value steps:(NSString *)steps {
+- (BOOL)checkExist:(NSString *)value {
     BOOL rt = NO;
     
-    NSArray *keys = [_frames allKeys];
-    if ([keys containsObject:value]) {
+    if ([_frames containsObject:value]) {
         rt = YES;
         //        NSString *oldSteps = [_frames objectForKey:value];
         //        if (steps.length == oldSteps.length) {

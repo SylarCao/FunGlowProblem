@@ -13,7 +13,9 @@
 		2C1D14611E1CCB7D00826453 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C1D145F1E1CCB7D00826453 /* Main.storyboard */; };
 		2C1D14631E1CCB7D00826453 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C1D14621E1CCB7D00826453 /* Assets.xcassets */; };
 		2C1D14661E1CCB7D00826453 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C1D14641E1CCB7D00826453 /* LaunchScreen.storyboard */; };
-		2CACD8181E1DE4E600F2E7FC /* MethodObject1.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CACD8171E1DE4E600F2E7FC /* MethodObject1.m */; };
+		2CACD81C1E1DF28600F2E7FC /* MethodObject1.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CACD81B1E1DF28600F2E7FC /* MethodObject1.m */; };
+		2CACD81F1E1DF29300F2E7FC /* MethodThread2.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CACD81E1E1DF29300F2E7FC /* MethodThread2.m */; };
+		2CACD8221E1E0CA700F2E7FC /* MethodReference3.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CACD8211E1E0CA700F2E7FC /* MethodReference3.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,8 +29,12 @@
 		2C1D14621E1CCB7D00826453 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2C1D14651E1CCB7D00826453 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2C1D14671E1CCB7D00826453 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2CACD8161E1DE4E600F2E7FC /* MethodObject1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MethodObject1.h; sourceTree = "<group>"; };
-		2CACD8171E1DE4E600F2E7FC /* MethodObject1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MethodObject1.m; sourceTree = "<group>"; };
+		2CACD81A1E1DF28600F2E7FC /* MethodObject1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MethodObject1.h; sourceTree = "<group>"; };
+		2CACD81B1E1DF28600F2E7FC /* MethodObject1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MethodObject1.m; sourceTree = "<group>"; };
+		2CACD81D1E1DF29300F2E7FC /* MethodThread2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MethodThread2.h; sourceTree = "<group>"; };
+		2CACD81E1E1DF29300F2E7FC /* MethodThread2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MethodThread2.m; sourceTree = "<group>"; };
+		2CACD8201E1E0CA700F2E7FC /* MethodReference3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MethodReference3.h; sourceTree = "<group>"; };
+		2CACD8211E1E0CA700F2E7FC /* MethodReference3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MethodReference3.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,10 +67,9 @@
 		2C1D14551E1CCB7D00826453 /* GlowFun */ = {
 			isa = PBXGroup;
 			children = (
+				2CACD8191E1DF28600F2E7FC /* sylar */,
 				2C1D14591E1CCB7D00826453 /* AppDelegate.h */,
 				2C1D145A1E1CCB7D00826453 /* AppDelegate.m */,
-				2CACD8161E1DE4E600F2E7FC /* MethodObject1.h */,
-				2CACD8171E1DE4E600F2E7FC /* MethodObject1.m */,
 				2C1D145C1E1CCB7D00826453 /* ViewController.h */,
 				2C1D145D1E1CCB7D00826453 /* ViewController.m */,
 				2C1D145F1E1CCB7D00826453 /* Main.storyboard */,
@@ -82,6 +87,19 @@
 				2C1D14571E1CCB7D00826453 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2CACD8191E1DF28600F2E7FC /* sylar */ = {
+			isa = PBXGroup;
+			children = (
+				2CACD81A1E1DF28600F2E7FC /* MethodObject1.h */,
+				2CACD81B1E1DF28600F2E7FC /* MethodObject1.m */,
+				2CACD81D1E1DF29300F2E7FC /* MethodThread2.h */,
+				2CACD81E1E1DF29300F2E7FC /* MethodThread2.m */,
+				2CACD8201E1E0CA700F2E7FC /* MethodReference3.h */,
+				2CACD8211E1E0CA700F2E7FC /* MethodReference3.m */,
+			);
+			path = sylar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -155,10 +173,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CACD8221E1E0CA700F2E7FC /* MethodReference3.m in Sources */,
 				2C1D145E1E1CCB7D00826453 /* ViewController.m in Sources */,
 				2C1D145B1E1CCB7D00826453 /* AppDelegate.m in Sources */,
+				2CACD81F1E1DF29300F2E7FC /* MethodThread2.m in Sources */,
 				2C1D14581E1CCB7D00826453 /* main.m in Sources */,
-				2CACD8181E1DE4E600F2E7FC /* MethodObject1.m in Sources */,
+				2CACD81C1E1DF28600F2E7FC /* MethodObject1.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
