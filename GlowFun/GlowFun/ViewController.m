@@ -11,6 +11,7 @@
 #import "MethodThread2.h"
 #import "MethodReference3.h"
 #import "MethodThread4.h"
+#import "MethodDictionary.h"
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 # define kReturnNilCondition(condition)    if (condition == nil) {return;}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -46,7 +47,9 @@
     
 //    [[MethodReference3 share] reference1];
     
-    [[MethodThread4 share] thread1];
+//    [[MethodThread4 share] thread1];
+    
+    [[MethodDictionary share] method1];
 }
 
 - (void)calculate {
